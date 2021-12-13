@@ -1,5 +1,6 @@
 package com.example.hack_week_100_treasures
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -15,22 +16,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val timer = object : CountDownTimer(30000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                binding.textView.text = "seconds remaining: " + millisUntilFinished / 1000
-            }
-
-            override fun onFinish() {
-                binding.textView.text = "done!"
-                binding.resetButton.visibility = View.VISIBLE
-            }
-        }
-
-        timer.start()
-
-        binding.resetButton.setOnClickListener{
-            it.visibility = View.GONE
-            timer.start()
+        binding.button.setOnClickListener{
+            val intent = Intent(this, GuessActivity::class.java)
+            startActivity(intent)
         }
     }
 }
