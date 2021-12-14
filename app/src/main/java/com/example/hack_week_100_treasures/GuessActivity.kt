@@ -20,10 +20,10 @@ import android.os.Looper
 
 class GuessActivity : AppCompatActivity(), SensorEventListener {
 
-    var rotationSensor: Sensor? = null
-    var gyroSensor: Sensor? = null
-    var sensorReactionEnabled = true
-    var rotationThresholdReached = false
+    private var rotationSensor: Sensor? = null
+    private var gyroSensor: Sensor? = null
+    private var sensorReactionEnabled = true
+    private var rotationThresholdReached = false
 
     lateinit var sensorManager: SensorManager
     lateinit var binding: ActivityGuessBinding
@@ -46,14 +46,17 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
 
         val timer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                binding.textView.text = "seconds remaining: " + millisUntilFinished / 1000
+                val str = "seconds remaining: " + millisUntilFinished / 1000
+                binding.time.text = str
             }
 
             override fun onFinish() {
-                binding.textView.text = "done!"
+                binding.time.text = getString(R.string.TimerDone)
                 binding.resetButton.visibility = View.VISIBLE
+
                 val str = "${player.name} got ${player.score} points"
-                binding.textView2.text = str
+                binding.character.text = str
+
                 sensorManager.unregisterListener(this@GuessActivity)
             }
         }
@@ -61,7 +64,6 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
         timer.start()
 
         binding.resetButton.setOnClickListener{
-            //it.visibility = View.GONE
             sensorManager.registerListener(this, rotationSensor, 1000)
             sensorManager.registerListener(this, gyroSensor, 1000)
             val intent = Intent(this, MainActivity::class.java)
@@ -75,7 +77,7 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
             moveOn(true)
         }
 
-        binding.textView2.text = repo.getRandomString()
+        binding.character.text = repo.getRandomString()
     }
 
     override fun onStart() {
@@ -148,7 +150,7 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
 
     private fun moveOn(correct: Boolean){
         if(correct) updateScore()
-        binding.textView2.text = repo.getRandomString()
+        binding.character.text = repo.getRandomString()
     }
 
     private fun updateScore(){

@@ -6,7 +6,13 @@ class CharactersRepository {
 
     private val gameCharacters: MutableList<Treasure> = mutableListOf()
 
-    val chars: MutableList<String> = mutableListOf("person 1", "person 2", "person 3", "person 4")
+    private val chars: MutableList<String> = mutableListOf()
+
+    init {
+       for (count in 1..100){
+           chars.add("person $count")
+       }
+    }
 
     fun fetchGuesses(): List<Treasure> {
         return gameCharacters

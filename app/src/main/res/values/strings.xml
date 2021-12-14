@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Hack-Week-100-treasures</string>
+    <string name="TimerDone">done!</string>
+    <string name="start">Start Game</string>
+    <string name="empty">--</string>
+    <string name="reset">Reset</string>
+    <string name="score">Score: 0</string>
 </resources>
