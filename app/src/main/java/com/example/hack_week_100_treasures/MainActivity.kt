@@ -2,6 +2,7 @@ package com.example.hack_week_100_treasures
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hack_week_100_treasures.databinding.ActivityMainBinding
 
@@ -16,6 +17,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.startButton.setOnClickListener{
             val intent = Intent(this, GuessActivity::class.java)
+            startActivity(intent)
+        }
+
+       // binding.settingsButton.visibility = View.GONE
+        binding.settingsButton.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
     }

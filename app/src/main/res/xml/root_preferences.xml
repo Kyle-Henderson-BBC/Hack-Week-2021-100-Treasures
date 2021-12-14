@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Game Options">
+        <SwitchPreferenceCompat
+            app:key="lose_points"
+            app:title="Lose points on pass" />
+
+            <ListPreference
+                app:defaultValue="60"
+                app:entries="@array/minutes"
+                app:entryValues="@array/minutesAlias"
+                app:key="duration"
+                app:title="Time limit" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

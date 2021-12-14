@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="minutes">
+        <item>"30 seconds"</item>
+        <item>"1 minute"</item>
+        <item>"2 minutes"</item>
+    </array>
+
+    <array name="minutesAlias">
+        <item>"30"</item>
+        <item>"60"</item>
+        <item>"120"</item>
+    </array>
+</resources>

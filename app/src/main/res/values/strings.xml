@@ -5,4 +5,5 @@
     <string name="empty">--</string>
     <string name="reset">Reset</string>
     <string name="score">Score: 0</string>
+    <string name="settings">Settings</string>
 </resources>

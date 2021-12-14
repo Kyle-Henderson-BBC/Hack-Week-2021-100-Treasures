@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HackWeek100treasures">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".GuessActivity"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
