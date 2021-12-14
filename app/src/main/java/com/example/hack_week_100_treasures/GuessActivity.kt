@@ -47,7 +47,7 @@ class GuessActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                binding.guessLayout?.textView?.text = "Score:"
+                binding.guessLayout?.panelTitle?.text = "Score:"
                 binding.guessLayout?.characterView?.text = player.name
                 binding.guessLayout?.timeView?.text = player.score.toString()
                 tiltEventService.stopSensing()
@@ -62,12 +62,12 @@ class GuessActivity : AppCompatActivity() {
 
             override fun onFinish() {
                 tiltEventService.startSensing()
-                binding.guessLayout?.textView?.text = "Time:"
+                binding.guessLayout?.panelTitle?.text = "Time:"
                 timer.start()
                 binding.guessLayout?.characterView?.text = repo.getRandomString()
             }
         }
-        binding.guessLayout?.textView?.text = "CountDown:"
+        binding.guessLayout?.panelTitle?.text = "CountDown:"
         binding.guessLayout?.characterView?.text = "Ready!"
         countDown.start()
 //        binding.resetButton.setOnClickListener{

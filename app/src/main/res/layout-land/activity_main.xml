@@ -4,17 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/start_button"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bbc_blocks"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/app_name_face_off"
+        style="@style/primary_title_text"
+        android:textSize="42sp"
+        android:textColor="@color/text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/subTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/start"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/app_subtitle"
+        style="@style/secondary_title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/side_panel"
+        app:layout_constraintTop_toBottomOf="@id/mainTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/side_panel_recycler_view"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:isScrollContainer="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/scroll_item" />
+
+    <TextView
+        android:id="@+id/start_button"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:text="@string/start"
+        android:gravity="center"
+        style="@style/cta_text"
+        android:background="@color/cta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/side_panel"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -29,32 +77,9 @@
         app:layout_constraintVertical_bias="0.1"
         android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="@string/app_name_face_off"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toStartOf="@+id/recyclerView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="150dp"
-        android:layout_height="match_parent"
-        android:clickable="false"
-        android:isScrollContainer="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/scroll_item" />
 
     <ImageView
-        android:id="@+id/floatingActionButton3"
+        android:id="@+id/scroll_side_panel_up_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -68,7 +93,7 @@
         android:focusable="true" />
 
     <ImageView
-        android:id="@+id/floatingActionButton4"
+        android:id="@+id/scroll_side_panel_down_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:backgroundTint="@android:color/transparent"
