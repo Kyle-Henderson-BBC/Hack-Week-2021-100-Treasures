@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This file needs to match the text styles as defined by UX in Zeplin -->
+<!-- All text in the app should inherit from one of these styles -->
+
+<resources>
+
+    <style name="primary_title_text" parent="bold_sans">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">42sp</item>
+    </style>
+
+    <style name="secondary_title_text" parent="medium_sans">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="cta_text" parent="bold_sans">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="large_numeric" parent="bold_sans">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">96sp</item>
+    </style>
+
+    <style name="prompt" parent="bold_sans">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">55sp</item>
+    </style>
+
+
+    // REITH FONTS
+
+    <style name="light_sans">
+        <item name="android:fontFamily">@font/reith_sans_light</item>
+    </style>
+
+    <style name="regular_sans">
+        <item name="android:fontFamily">@font/reith_sans</item>
+    </style>
+
+    <style name="medium_sans">
+        <item name="android:fontFamily">@font/reith_sans_medium</item>
+    </style>
+
+    <style name="bold_sans">
+        <item name="android:fontFamily">@font/reith_sans_bold</item>
+    </style>
+
+    <style name="italic_sans">
+        <item name="android:fontFamily">@font/reith_sans_italic</item>
+    </style>
+
+    <style name="extra_bold_sans">
+        <item name="android:fontFamily">@font/reith_sans_extrabold</item>
+    </style>
+
+    <style name="bold_italic_sans">
+        <item name="android:fontFamily">@font/reith_sans_bold_italic</item>
+    </style>
+
+</resources>
