@@ -62,7 +62,7 @@
         style="@style/cta_text"
         android:background="@color/cta"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/side_panel"
+        app:layout_constraintEnd_toStartOf="@+id/side_panel_recycler_view"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
