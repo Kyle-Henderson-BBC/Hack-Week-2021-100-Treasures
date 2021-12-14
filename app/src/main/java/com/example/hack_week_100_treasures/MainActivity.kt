@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-       // binding.settingsButton.visibility = View.GONE
+        binding.settingsButton.visibility = View.GONE
         binding.settingsButton.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
