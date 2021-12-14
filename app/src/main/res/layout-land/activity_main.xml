@@ -44,14 +44,14 @@
         android:id="@+id/recyclerView"
         android:layout_width="150dp"
         android:layout_height="match_parent"
+        android:clickable="false"
+        android:isScrollContainer="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/scroll_item"
-        android:clickable="false"
-        android:isScrollContainer="false" />
+        tools:listitem="@layout/scroll_item" />
 
     <ImageView
         android:id="@+id/floatingActionButton3"

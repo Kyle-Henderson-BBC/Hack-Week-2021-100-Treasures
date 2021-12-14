@@ -39,44 +39,56 @@ class GuessActivity : AppCompatActivity() {
 
         player = Player("player 1", 0)
 
-        val timer = object : CountDownTimer(60000, 1000) {
+
+        val timer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                val str = "seconds remaining: " + millisUntilFinished / 1000
-                binding.time.text = str
+                val str = (millisUntilFinished / 1000).toString()
+                binding.guessLayout?.timeView?.text = str
             }
 
             override fun onFinish() {
-                binding.time.text = getString(R.string.TimerDone)
-                binding.resetButton.visibility = View.VISIBLE
-
-                val str = "${player.name} got ${player.score} points"
-                binding.character.text = str
-
+                binding.guessLayout?.textView?.text = "Score:"
+                binding.guessLayout?.characterView?.text = player.name
+                binding.guessLayout?.timeView?.text = player.score.toString()
                 tiltEventService.stopSensing()
             }
         }
 
-        timer.start()
+        val countDown = object: CountDownTimer(4000, 1000){
+            override fun onTick(millisUntilFinished: Long) {
+                val str = (millisUntilFinished / 1000).toString()
+                binding.guessLayout?.timeView?.text = str
+            }
 
-        binding.resetButton.setOnClickListener{
-            tiltEventService.startSensing()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            override fun onFinish() {
+                tiltEventService.startSensing()
+                binding.guessLayout?.textView?.text = "Time:"
+                timer.start()
+                binding.guessLayout?.characterView?.text = repo.getRandomString()
+            }
         }
+        binding.guessLayout?.textView?.text = "CountDown:"
+        binding.guessLayout?.characterView?.text = "Ready!"
+        countDown.start()
+//        binding.resetButton.setOnClickListener{
+//            sensorManager.registerListener(this, rotationSensor, 1000)
+//            sensorManager.registerListener(this, gyroSensor, 1000)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        binding.floatingActionButton.setOnClickListener{
+//            moveOn(false)
+//        }
+//        binding.floatingActionButton2.setOnClickListener{
+//            moveOn(true)
+//        }
 
-        binding.floatingActionButton.setOnClickListener{
-            moveOn(false)
-        }
-        binding.floatingActionButton2.setOnClickListener{
-            moveOn(true)
-        }
 
-        binding.character.text = repo.getRandomString()
     }
-
     override fun onStart() {
         super.onStart()
-        tiltEventService.startSensing()
+        //tiltEventService.startSensing()
     }
 
     override fun onStop() {
@@ -91,7 +103,7 @@ class GuessActivity : AppCompatActivity() {
         } else {
             playIncorrectSound()
         }
-        binding.character.text = repo.getRandomString()
+        binding.guessLayout?.characterView?.text = repo.getRandomString()
     }
 
     private fun playIncorrectSound() {
@@ -105,7 +117,7 @@ class GuessActivity : AppCompatActivity() {
     private fun updateScore(){
         player.score += 1
         val str = "Score: " + player.score.toString()
-        binding.score.text = str
+        //binding.score.text = str
     }
 
 }
