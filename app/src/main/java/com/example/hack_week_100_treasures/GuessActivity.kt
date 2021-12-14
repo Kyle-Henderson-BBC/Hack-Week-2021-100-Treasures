@@ -2,40 +2,39 @@ package com.example.hack_week_100_treasures
 
 import android.content.Context
 import android.content.Intent
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hack_week_100_treasures.databinding.ActivityGuessBinding
-import android.os.Looper
 import com.example.hack_week_100_treasures.sensor.TiltEventService
-import kotlin.math.roundToInt
-import kotlin.math.sqrt
+import android.media.SoundPool
 
 
 class GuessActivity : AppCompatActivity() {
     lateinit var tiltEventService: TiltEventService
     lateinit var binding: ActivityGuessBinding
     lateinit var player: Player
+    var correctSfxId: Int? = null
+    var incorrectSfxId: Int? = null
 
     private val repo = CharactersRepository()
+    private val soundPool = SoundPool.Builder().setMaxStreams(2).build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        correctSfxId = soundPool.load(applicationContext, R.raw.correct_sfx, 1)
+        incorrectSfxId = soundPool.load(applicationContext, R.raw.incorrect_sfx, 1)
 
         binding = ActivityGuessBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         tiltEventService = TiltEventService(
             getSystemService(Context.SENSOR_SERVICE) as SensorManager,
-            {},
-            {}
+            { moveOn(false) },
+            { moveOn(true) }
         )
 
         player = Player("player 1", 0)
@@ -85,11 +84,22 @@ class GuessActivity : AppCompatActivity() {
         tiltEventService.stopSensing()
     }
 
-
-
     private fun moveOn(correct: Boolean){
-        if(correct) updateScore()
+        if(correct) {
+            updateScore()
+            playCorrectSound()
+        } else {
+            playIncorrectSound()
+        }
         binding.character.text = repo.getRandomString()
+    }
+
+    private fun playIncorrectSound() {
+        incorrectSfxId?.let { soundPool.play(it, 1f, 1f, 10, 0, 1f) };
+    }
+
+    private fun playCorrectSound() {
+        correctSfxId?.let { soundPool.play(it, 1f, 1f, 10, 0, 1f) };
     }
 
     private fun updateScore(){
@@ -97,4 +107,5 @@ class GuessActivity : AppCompatActivity() {
         val str = "Score: " + player.score.toString()
         binding.score.text = str
     }
+
 }

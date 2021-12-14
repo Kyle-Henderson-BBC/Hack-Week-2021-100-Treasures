@@ -15,18 +15,10 @@ class TiltEventService(
     private val onTiltUp: () -> Unit,
     private val onTiltDown: () -> Unit): SensorEventListener {
 
-    private var rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
-    private var gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
-    private var magneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-    private var accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-
     private var sensorReactionEnabled = true
 
     fun startSensing() {
-        sensorManager.registerListener(this, rotationSensor, 1000)
-        sensorManager.registerListener(this, gyroSensor, 1000)
-        sensorManager.registerListener(this, magneticFieldSensor, 1000)
-        sensorManager.registerListener(this, accelerometerSensor, 1000)
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), 1000)
     }
 
     fun stopSensing() {
@@ -51,11 +43,11 @@ class TiltEventService(
                 Log.d("Inclination", inclination.toString())
 
                 if(inclination in 20..50) {
-                    disableSensorFor1Second()
+                    disableSensorFor2Seconds()
                     Log.d("TiltEventService", "tilted back")
                     onTiltUp()
                 } else if(inclination in 140..170) {
-                    disableSensorFor1Second()
+                    disableSensorFor2Seconds()
                     Log.d("TiltEventService", "tiled forward")
                     onTiltDown()
                 }
@@ -63,10 +55,10 @@ class TiltEventService(
         }
     }
 
-    private fun disableSensorFor1Second() {
+    private fun disableSensorFor2Seconds() {
         sensorReactionEnabled = false
         val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed({ sensorReactionEnabled = true }, 1000)
+        handler.postDelayed({ sensorReactionEnabled = true }, 2000)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
