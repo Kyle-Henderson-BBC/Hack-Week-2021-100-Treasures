@@ -27,6 +27,7 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
 
     lateinit var sensorManager: SensorManager
     lateinit var binding: ActivityGuessBinding
+    lateinit var player: Player
 
     private val repo = CharactersRepository()
 
@@ -41,7 +42,7 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
         gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 
-        val player = Player("player 1", 0)
+        player = Player("player 1", 0)
 
         val timer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -65,6 +66,13 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
             sensorManager.registerListener(this, gyroSensor, 1000)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.floatingActionButton.setOnClickListener{
+            moveOn(false)
+        }
+        binding.floatingActionButton2.setOnClickListener{
+            moveOn(true)
         }
 
         binding.textView2.text = repo.getRandomString()
@@ -136,5 +144,16 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         Log.e("Changed:", sensor.toString())
+    }
+
+    private fun moveOn(correct: Boolean){
+        if(correct) updateScore()
+        binding.textView2.text = repo.getRandomString()
+    }
+
+    private fun updateScore(){
+        player.score += 1
+        val str = "Score: " + player.score.toString()
+        binding.score.text = str
     }
 }
