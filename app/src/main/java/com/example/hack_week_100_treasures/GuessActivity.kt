@@ -14,18 +14,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hack_week_100_treasures.databinding.ActivityGuessBinding
 import android.os.Looper
+import com.example.hack_week_100_treasures.sensor.TiltEventService
+import kotlin.math.roundToInt
+import kotlin.math.sqrt
 
 
-
-
-class GuessActivity : AppCompatActivity(), SensorEventListener {
-
-    private var rotationSensor: Sensor? = null
-    private var gyroSensor: Sensor? = null
-    private var sensorReactionEnabled = true
-    private var rotationThresholdReached = false
-
-    lateinit var sensorManager: SensorManager
+class GuessActivity : AppCompatActivity() {
+    lateinit var tiltEventService: TiltEventService
     lateinit var binding: ActivityGuessBinding
     lateinit var player: Player
 
@@ -37,14 +32,15 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
         binding = ActivityGuessBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Sensor
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
-        gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        tiltEventService = TiltEventService(
+            getSystemService(Context.SENSOR_SERVICE) as SensorManager,
+            {},
+            {}
+        )
 
         player = Player("player 1", 0)
 
-        val timer = object : CountDownTimer(10000, 1000) {
+        val timer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val str = "seconds remaining: " + millisUntilFinished / 1000
                 binding.time.text = str
@@ -57,15 +53,14 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
                 val str = "${player.name} got ${player.score} points"
                 binding.character.text = str
 
-                sensorManager.unregisterListener(this@GuessActivity)
+                tiltEventService.stopSensing()
             }
         }
 
         timer.start()
 
         binding.resetButton.setOnClickListener{
-            sensorManager.registerListener(this, rotationSensor, 1000)
-            sensorManager.registerListener(this, gyroSensor, 1000)
+            tiltEventService.startSensing()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -82,71 +77,15 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onStart() {
         super.onStart()
-        sensorManager.registerListener(this, rotationSensor, 1000)
-        sensorManager.registerListener(this, gyroSensor, 1000)
+        tiltEventService.startSensing()
     }
 
     override fun onStop() {
         super.onStop()
-        sensorManager.unregisterListener(this)
+        tiltEventService.stopSensing()
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event != null && event.sensor.type == Sensor.TYPE_ROTATION_VECTOR) {
-            val xRotation = event.values[0]
-            //Log.e("Value", "x: $xRotation")
-            //binding.textView2.text = xRotation.toString()
 
-            when{
-                xRotation >= -0.2 -> {
-                    rotationThresholdReached = true
-                }
-                xRotation <= -0.8 -> {
-                    rotationThresholdReached = true
-                }
-                else -> {
-                    rotationThresholdReached = false
-                }
-            }
-        }
-
-        if(event != null && event.sensor.type == Sensor.TYPE_GYROSCOPE){
-            val xAxis = event.values[1]
-            //binding.textView2.text = xAxis.toString()
-            when{
-                xAxis <= -1 -> {
-                    if(sensorReactionEnabled) {
-                        Log.d("Gyro", "Rotation Threshold Reached: $rotationThresholdReached")
-                        sensorReactionEnabled = false
-                        val handler = Handler(Looper.getMainLooper())
-                        handler.postDelayed({ sensorReactionEnabled = true }, 1000)
-
-                        Log.d("Gyro", "Flicked Forward")
-//                        binding.textView2.text = "Up"
-                    }
-                }
-                xAxis >= 1 -> {
-                    if(sensorReactionEnabled) {
-                        Log.d("Gyro", "Rotation Threshold Reached: $rotationThresholdReached")
-                        sensorReactionEnabled = false
-                        val handler = Handler(Looper.getMainLooper())
-                        handler.postDelayed({ sensorReactionEnabled = true }, 1000)
-
-                        Log.d("Gyro", "Flicked Back")
-//                        binding.textView2.text = "Down"
-                    }
-                }
-                else -> {
-//                    binding.textView2.text = "Flat"
-                }
-            }
-        }
-
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        Log.e("Changed:", sensor.toString())
-    }
 
     private fun moveOn(correct: Boolean){
         if(correct) updateScore()
