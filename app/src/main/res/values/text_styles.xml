@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- This file needs to match the text styles as defined by UX in Zeplin -->
-<!-- All text in the app should inherit from one of these styles -->
-
 <resources>
 
     <style name="primary_title_text" parent="bold_sans">
