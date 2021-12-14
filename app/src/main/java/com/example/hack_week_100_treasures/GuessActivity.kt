@@ -1,6 +1,7 @@
 package com.example.hack_week_100_treasures
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -27,6 +28,8 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
     lateinit var sensorManager: SensorManager
     lateinit var binding: ActivityGuessBinding
 
+    private val repo = CharactersRepository()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,7 +41,9 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
         gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 
-        val timer = object : CountDownTimer(30000, 1000) {
+        val player = Player("player 1", 0)
+
+        val timer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 binding.textView.text = "seconds remaining: " + millisUntilFinished / 1000
             }
@@ -46,15 +51,23 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
             override fun onFinish() {
                 binding.textView.text = "done!"
                 binding.resetButton.visibility = View.VISIBLE
+                val str = "${player.name} got ${player.score} points"
+                binding.textView2.text = str
+                sensorManager.unregisterListener(this@GuessActivity)
             }
         }
 
         timer.start()
 
         binding.resetButton.setOnClickListener{
-            it.visibility = View.GONE
-            timer.start()
+            //it.visibility = View.GONE
+            sensorManager.registerListener(this, rotationSensor, 1000)
+            sensorManager.registerListener(this, gyroSensor, 1000)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
+
+        binding.textView2.text = repo.getRandomString()
     }
 
     override fun onStart() {
@@ -99,7 +112,7 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
                         handler.postDelayed({ sensorReactionEnabled = true }, 1000)
 
                         Log.d("Gyro", "Flicked Forward")
-                        binding.textView2.text = "Up"
+//                        binding.textView2.text = "Up"
                     }
                 }
                 xAxis >= 1 -> {
@@ -110,11 +123,11 @@ class GuessActivity : AppCompatActivity(), SensorEventListener {
                         handler.postDelayed({ sensorReactionEnabled = true }, 1000)
 
                         Log.d("Gyro", "Flicked Back")
-                        binding.textView2.text = "Down"
+//                        binding.textView2.text = "Down"
                     }
                 }
                 else -> {
-                    binding.textView2.text = "Flat"
+//                    binding.textView2.text = "Flat"
                 }
             }
         }
