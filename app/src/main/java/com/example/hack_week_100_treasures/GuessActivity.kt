@@ -16,9 +16,10 @@ class GuessActivity : AppCompatActivity() {
     lateinit var tiltEventService: TiltEventService
     lateinit var binding: ActivityGuessBinding
     lateinit var player: Player
+
     private var correctSfxId: Int? = null
     private var incorrectSfxId: Int? = null
-
+    private var clueSfxId: Int? = null
     private val repo = CharactersRepository()
     private val soundPool = SoundPool.Builder().setMaxStreams(2).build()
 
@@ -67,7 +68,7 @@ class GuessActivity : AppCompatActivity() {
                 tiltEventService.startSensing()
                 binding.guessLayout?.panelTitle?.text = getString(R.string.time)
                 timer.start()
-                binding.guessLayout?.characterView?.text = repo.getRandomString()
+                setCurrentCharacter(repo.getNextCharacterAndConsume())
             }
         }
         binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
@@ -100,7 +101,20 @@ class GuessActivity : AppCompatActivity() {
         } else {
             playIncorrectSound()
         }
-        binding.guessLayout?.characterView?.text = repo.getRandomString()
+        setCurrentCharacter(repo.getNextCharacterAndConsume())
+    }
+
+    private fun setCurrentCharacter(character: Character) {
+        binding.guessLayout?.characterView?.text = character.name
+
+        character.soundClueId?.let { soundClueResId ->
+            clueSfxId = soundPool.load(applicationContext, soundClueResId, 1)
+            binding.root.setOnClickListener {
+                clueSfxId?.let { soundPool.play(it, 1f, 1f, 10, 0, 1f) };
+            }
+        } ?: run {
+            binding.root.setOnClickListener(null)
+        }
     }
 
     private fun playIncorrectSound() {

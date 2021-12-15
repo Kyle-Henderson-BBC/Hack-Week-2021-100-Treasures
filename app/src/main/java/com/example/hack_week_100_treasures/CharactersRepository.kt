@@ -4,30 +4,43 @@ import kotlin.random.Random
 
 class CharactersRepository {
 
-    private val gameCharacters: MutableList<Treasure> = mutableListOf()
+    // TODO: this list exists only as MVP hack values
+    private val hardCodedGameCharacters: List<Character> = listOf(
+        Character("David Attenborough", null),
+        Character("Doctor Who", null),
+        Character("Hacker T. Dog", null),
+        Character("Villanelle (Killing Eve)", null),
+        Character("Wallace and Gromit", null),
+        Character("Terry Wogan", null),
+        Character("Dirty Den (Den Watts)", null),
+        Character("Basil Brush", null),
+        Character("Owain Wyn Evans", null),
+        Character("Fiona Bruce", null),
+        Character("Oti Mabuse", null),
+        Character("Hey Duggee", null),
+        Character("Graham Norton", null),
+        Character("Gary Linnekar", null),
+    )
 
-    private val chars: MutableList<String> = mutableListOf()
+    private var availableCharacters: MutableList<Character> = hardCodedGameCharacters.toMutableList()
 
-    init {
-       for (count in 1..100){
-           chars.add("person $count")
-       }
+    fun resetAvailableCharacters() {
+        // TODO: this will be replaced with a fetch from network or local database
+        availableCharacters = hardCodedGameCharacters.toMutableList()
     }
 
-    fun fetchGuesses(): List<Treasure> {
-        return gameCharacters
+    fun fetchAvailableCharacters(): List<Character> {
+        return availableCharacters
     }
 
-    fun addGuess(treasure: Treasure){
-        gameCharacters.add(treasure)
+    fun addCharacter(character: Character){
+        availableCharacters.add(character)
     }
 
-    fun getRandomGuess(): Treasure {
-        val randomIndex = Random.nextInt(gameCharacters.size)
-        return gameCharacters[randomIndex]
-    }
-    fun getRandomString(): String {
-        val randomIndex = Random.nextInt(chars.size)
-        return chars[randomIndex]
+    fun getNextCharacterAndConsume(): Character {
+        val randomIndex = Random.nextInt(availableCharacters.size)
+        val character = availableCharacters[randomIndex]
+        availableCharacters.removeAt(randomIndex)
+        return character
     }
 }
