@@ -8,12 +8,14 @@
     android:background="@color/black">
 
     <ImageView
+        android:id="@+id/image_scroll_item_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/ic_baseline_accessibility_24"
         android:backgroundTint="@color/green"/>
+
     <TextView
-        android:id="@+id/scroll_item_text"
+        android:id="@+id/image_scroll_item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
@@ -25,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/position"
+        android:id="@+id/image_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
