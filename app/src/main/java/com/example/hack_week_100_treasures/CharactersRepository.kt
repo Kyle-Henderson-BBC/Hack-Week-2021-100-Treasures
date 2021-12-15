@@ -41,6 +41,8 @@ class CharactersRepository {
         val randomIndex = Random.nextInt(availableCharacters.size)
         val character = availableCharacters[randomIndex]
         availableCharacters.removeAt(randomIndex)
+
+        if(availableCharacters.size < 1) resetAvailableCharacters()
         return character
     }
 }
