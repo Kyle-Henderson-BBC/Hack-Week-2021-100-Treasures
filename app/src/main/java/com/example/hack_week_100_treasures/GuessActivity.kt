@@ -109,6 +109,7 @@ class GuessActivity : AppCompatActivity() {
             binding.yourFaves?.root?.visibility = View.VISIBLE
 
             binding.yourFaves?.mainTitle?.text = charactersList[0].name
+            binding.yourFaves?.subTitle?.text = charactersList[0].desc
 
             binding.yourFaves?.buttonLinearLayout?.visibility = View.VISIBLE
 
@@ -140,7 +141,7 @@ class GuessActivity : AppCompatActivity() {
     }
 
     private fun setUpRecycler() {
-        val adapter = MainAdapter(charactersList.map { it.name })
+        val adapter = GuessAdapter(charactersList)
         binding.yourFaves?.sidePanelRecyclerView?.layoutManager = LinearLayoutManager(this)
         //Disables swiping
         binding.yourFaves?.sidePanelRecyclerView?.addOnItemTouchListener(object: RecyclerView.SimpleOnItemTouchListener() {

@@ -19,4 +19,5 @@
     <string name="slide_panel_up">slide panel up</string>
     <string name="slide_panel_down">slide panel down</string>
     <string name="how_to_play">How to Play</string>
+    <string name="tap_to_play_audio_or_video">Tap to play audio or video</string>
 </resources>
