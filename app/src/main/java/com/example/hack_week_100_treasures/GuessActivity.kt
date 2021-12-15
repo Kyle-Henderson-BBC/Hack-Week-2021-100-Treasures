@@ -20,15 +20,17 @@ class GuessActivity : AppCompatActivity() {
     private var correctSfxId: Int? = null
     private var incorrectSfxId: Int? = null
     private var clueSfxId: Int? = null
+    private var current: Character? = null
+
     private val repo = CharactersRepository()
     private val soundPool = SoundPool.Builder().setMaxStreams(2).build()
+    private val charactersMap: MutableMap<Character, Boolean> = mutableMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         correctSfxId = soundPool.load(applicationContext, R.raw.correct_sfx, 1)
         incorrectSfxId = soundPool.load(applicationContext, R.raw.incorrect_sfx, 1)
-
         binding = ActivityGuessBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -68,7 +70,7 @@ class GuessActivity : AppCompatActivity() {
                 tiltEventService.startSensing()
                 binding.guessLayout?.panelTitle?.text = getString(R.string.time)
                 timer.start()
-                setCurrentCharacter(repo.getNextCharacterAndConsume())
+                current = setCurrentCharacter(repo.getNextCharacterAndConsume())
             }
         }
         binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
@@ -79,6 +81,7 @@ class GuessActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
         binding.guessLayout?.passButton?.setOnClickListener {
             binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
             binding.guessLayout?.characterView?.text = getString(R.string.ready)
@@ -86,7 +89,23 @@ class GuessActivity : AppCompatActivity() {
             countDown.start()
         }
 
+        binding.guessLayout?.passesButton?.setOnClickListener{
+            binding.guessLayout?.root?.visibility = View.GONE
+            binding.yourFaves?.root?.visibility = View.VISIBLE
 
+            binding.yourFaves?.settingsButton?.visibility = View.GONE
+            binding.yourFaves?.startButton?.visibility = View.GONE
+            binding.yourFaves?.mainTitle?.text = charactersMap.toString()
+
+            setUpRecycler()
+        }
+
+
+    }
+
+    private fun setUpRecycler() {
+        //todo
+        val adapter  = MainAdapter(charactersMap.keys.map { it.name })
     }
 
     override fun onStop() {
@@ -97,14 +116,16 @@ class GuessActivity : AppCompatActivity() {
     private fun moveOn(correct: Boolean){
         if(correct) {
             updateScore()
+            charactersMap[current!!] = true
             playCorrectSound()
         } else {
+            charactersMap[current!!] = false
             playIncorrectSound()
         }
-        setCurrentCharacter(repo.getNextCharacterAndConsume())
+        current = setCurrentCharacter(repo.getNextCharacterAndConsume())
     }
 
-    private fun setCurrentCharacter(character: Character) {
+    private fun setCurrentCharacter(character: Character): Character? {
         binding.guessLayout?.characterView?.text = character.name
 
         character.soundClueId?.let { soundClueResId ->
@@ -115,6 +136,7 @@ class GuessActivity : AppCompatActivity() {
         } ?: run {
             binding.root.setOnClickListener(null)
         }
+        return character
     }
 
     private fun playIncorrectSound() {
