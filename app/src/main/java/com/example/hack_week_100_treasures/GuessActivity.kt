@@ -108,7 +108,7 @@ class GuessActivity : AppCompatActivity() {
         binding.guessLayout?.characterView?.text = character.name
 
         character.soundClueId?.let { soundClueResId ->
-            clueSfxId = soundPool.load(applicationContext, soundClueResId, 1)
+            clueSfxId = soundPool.load(applicationContext, soundClueResId, 2)
             binding.root.setOnClickListener {
                 clueSfxId?.let { soundPool.play(it, 1f, 1f, 10, 0, 1f) };
             }

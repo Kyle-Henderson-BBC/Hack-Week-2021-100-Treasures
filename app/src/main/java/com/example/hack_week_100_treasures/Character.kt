@@ -1,6 +1,6 @@
 package com.example.hack_week_100_treasures
 
-import androidx.annotation.IdRes
+import androidx.annotation.RawRes
 
 data class Character(val name: String,
-                     @IdRes val soundClueId: Int?)
+                     @RawRes val soundClueId: Int?)
