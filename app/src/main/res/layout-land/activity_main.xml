@@ -110,4 +110,34 @@
         android:focusable="true"
         android:contentDescription="@string/slide_panel_down"/>
 
+    <LinearLayout
+        android:id="@+id/button_linear_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/side_panel_recycler_view"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/end_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_game"
+            android:gravity="center"
+            style="@style/cta_text"
+            android:background="@color/button_selector"
+            android:layout_weight="33"/>
+
+        <TextView
+            android:id="@+id/pass_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next_player"
+            android:gravity="center"
+            style="@style/cta_text"
+            android:background="@color/button_selector"
+            android:layout_weight="33"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

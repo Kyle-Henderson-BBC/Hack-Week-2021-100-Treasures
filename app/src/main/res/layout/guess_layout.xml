@@ -94,7 +94,5 @@
             style="@style/cta_text"
             android:background="@color/button_selector"
             android:layout_weight="33"/>
-
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
