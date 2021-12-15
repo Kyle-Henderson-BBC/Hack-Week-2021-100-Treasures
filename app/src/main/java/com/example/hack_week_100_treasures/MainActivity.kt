@@ -52,16 +52,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun scrollUp(){
         val max = binding.sidePanelRecyclerView?.adapter?.itemCount ?: 0
-        model.mainPosition += 1
-        if(model.mainPosition >= max) model.mainPosition = 0
+        model.mainPosition -= 1
+        if(model.mainPosition < 0) model.mainPosition = max - 1
 
         binding.sidePanelRecyclerView?.smoothScrollToPosition(model.mainPosition)
 
     }
+
     private fun scrollDown(){
         val max = binding.sidePanelRecyclerView?.adapter?.itemCount ?: 0
-        model.mainPosition -= 1
-        if(model.mainPosition < 0) model.mainPosition = max - 1
+        model.mainPosition += 1
+        if(model.mainPosition >= max) model.mainPosition = 0
 
         binding.sidePanelRecyclerView?.smoothScrollToPosition(model.mainPosition)
     }

@@ -38,7 +38,7 @@ class GuessActivity : AppCompatActivity() {
         )
 
         player = Player("player 1", 0)
-
+        binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
 
         val timer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -50,6 +50,9 @@ class GuessActivity : AppCompatActivity() {
                 binding.guessLayout?.panelTitle?.text = "Score:"
                 binding.guessLayout?.characterView?.text = player.name
                 binding.guessLayout?.timeView?.text = player.score.toString()
+
+                binding.guessLayout?.buttonLinearLayout?.visibility = View.VISIBLE
+
                 tiltEventService.stopSensing()
             }
         }
@@ -70,6 +73,17 @@ class GuessActivity : AppCompatActivity() {
         binding.guessLayout?.panelTitle?.text = "CountDown:"
         binding.guessLayout?.characterView?.text = "Ready!"
         countDown.start()
+
+        binding.guessLayout?.endButton?.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        binding.guessLayout?.passButton?.setOnClickListener {
+            binding.guessLayout?.panelTitle?.text = "CountDown:"
+            binding.guessLayout?.characterView?.text = "Ready!"
+            binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
+            countDown.start()
+        }
 //        binding.resetButton.setOnClickListener{
 //            sensorManager.registerListener(this, rotationSensor, 1000)
 //            sensorManager.registerListener(this, gyroSensor, 1000)

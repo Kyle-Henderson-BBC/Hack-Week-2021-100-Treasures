@@ -9,4 +9,7 @@
     <string name="app_name_face_off">The Great British Face Off</string>
     <string name="app_subtitle">Become famous faces from 100 years of Brilliant British Characters</string>
     <string name="_0_of_0">0 of 0</string>
+    <string name="end_game">End Game</string>
+    <string name="next_player">Next Player</string>
+    <string name="your_passes">Your Passes</string>
 </resources>
