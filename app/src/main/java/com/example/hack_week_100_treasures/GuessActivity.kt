@@ -16,8 +16,8 @@ class GuessActivity : AppCompatActivity() {
     lateinit var tiltEventService: TiltEventService
     lateinit var binding: ActivityGuessBinding
     lateinit var player: Player
-    var correctSfxId: Int? = null
-    var incorrectSfxId: Int? = null
+    private var correctSfxId: Int? = null
+    private var incorrectSfxId: Int? = null
 
     private val repo = CharactersRepository()
     private val soundPool = SoundPool.Builder().setMaxStreams(2).build()
@@ -37,7 +37,7 @@ class GuessActivity : AppCompatActivity() {
             { moveOn(true) }
         )
 
-        player = Player("player 1", 0)
+        player = Player("Times Up!", 0)
         binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
 
         val timer = object : CountDownTimer(10000, 1000) {
@@ -47,7 +47,7 @@ class GuessActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                binding.guessLayout?.panelTitle?.text = "Score:"
+                binding.guessLayout?.panelTitle?.text = getString(R.string.score)
                 binding.guessLayout?.characterView?.text = player.name
                 binding.guessLayout?.timeView?.text = player.score.toString()
 
@@ -65,13 +65,13 @@ class GuessActivity : AppCompatActivity() {
 
             override fun onFinish() {
                 tiltEventService.startSensing()
-                binding.guessLayout?.panelTitle?.text = "Time:"
+                binding.guessLayout?.panelTitle?.text = getString(R.string.time)
                 timer.start()
                 binding.guessLayout?.characterView?.text = repo.getRandomString()
             }
         }
-        binding.guessLayout?.panelTitle?.text = "CountDown:"
-        binding.guessLayout?.characterView?.text = "Ready!"
+        binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
+        binding.guessLayout?.characterView?.text = getString(R.string.ready)
         countDown.start()
 
         binding.guessLayout?.endButton?.setOnClickListener {
@@ -79,30 +79,13 @@ class GuessActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.guessLayout?.passButton?.setOnClickListener {
-            binding.guessLayout?.panelTitle?.text = "CountDown:"
-            binding.guessLayout?.characterView?.text = "Ready!"
+            binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
+            binding.guessLayout?.characterView?.text = getString(R.string.ready)
             binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
             countDown.start()
         }
-//        binding.resetButton.setOnClickListener{
-//            sensorManager.registerListener(this, rotationSensor, 1000)
-//            sensorManager.registerListener(this, gyroSensor, 1000)
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//        binding.floatingActionButton.setOnClickListener{
-//            moveOn(false)
-//        }
-//        binding.floatingActionButton2.setOnClickListener{
-//            moveOn(true)
-//        }
 
 
-    }
-    override fun onStart() {
-        super.onStart()
-        //tiltEventService.startSensing()
     }
 
     override fun onStop() {
@@ -121,17 +104,15 @@ class GuessActivity : AppCompatActivity() {
     }
 
     private fun playIncorrectSound() {
-        incorrectSfxId?.let { soundPool.play(it, 1f, 1f, 10, 0, 1f) };
+        incorrectSfxId?.let { soundPool.play(it, 1f, 1f, 10, 0, 1f) }
     }
 
     private fun playCorrectSound() {
-        correctSfxId?.let { soundPool.play(it, 1f, 1f, 10, 0, 1f) };
+        correctSfxId?.let { soundPool.play(it, 1f, 1f, 10, 0, 1f) }
     }
 
     private fun updateScore(){
         player.score += 1
-        val str = "Score: " + player.score.toString()
-        //binding.score.text = str
     }
 
 }

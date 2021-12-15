@@ -14,6 +14,7 @@
         android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/bbc"
         />
     <TextView
         android:id="@+id/mainTitle"
@@ -91,7 +92,8 @@
         app:elevation="0dp"
         android:background="@null"
         app:srcCompat="@drawable/ic_baseline_arrow_upward_24"
-        android:focusable="true" />
+        android:focusable="true"
+        android:contentDescription="@string/slide_panel_up"/>
 
     <ImageView
         android:id="@+id/scroll_side_panel_down_button"
@@ -105,6 +107,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_downward_24"
-        android:focusable="true" />
+        android:focusable="true"
+        android:contentDescription="@string/slide_panel_down"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
