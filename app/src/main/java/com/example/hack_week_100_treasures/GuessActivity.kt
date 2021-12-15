@@ -82,6 +82,7 @@ class GuessActivity : AppCompatActivity() {
                 player.score = 0
                 charactersList = mutableListOf()
                 timer.start()
+                binding.guessLayout?.root?.setBackgroundColor(getColor(R.color.blue))
                 current = setCurrentCharacter(repo.getNextCharacterAndConsume())
             }
         }
@@ -138,7 +139,6 @@ class GuessActivity : AppCompatActivity() {
     }
 
     private fun setUpRecycler() {
-        //todo
         val adapter = MainAdapter(charactersList.map { it.name })
         binding.yourFaves?.sidePanelRecyclerView?.layoutManager = LinearLayoutManager(this)
         //Disables swiping

@@ -3,8 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_downward_24.xml" value="0.2140625" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_upward_24.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout-land/activity_guess.xml" value="0.23878303631194242" />
+        <entry key="app/src/main/res/layout-land/activity_guess_count_down.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_guess.xml" value="0.13041915727391454" />
         <entry key="app/src/main/res/layout/activity_guess2.xml" value="0.1859375" />
+        <entry key="app/src/main/res/layout/activity_guess_count_down.xml" value="0.2572463768115942" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2572463768115942" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/guess_3_button.xml" value="0.19895833333333332" />
+        <entry key="app/src/main/res/layout/guess_layout.xml" value="0.19895833333333332" />
+        <entry key="app/src/main/res/layout/passes_item.xml" value="0.2513586956521739" />
+        <entry key="app/src/main/res/layout/passes_layout.xml" value="0.2513586956521739" />
+        <entry key="app/src/main/res/layout/scroll_item.xml" value="0.27674984001016417" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.2861404713937125" />
       </map>
     </option>
   </component>
