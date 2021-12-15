@@ -69,12 +69,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/end_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="@string/end_game"
             android:gravity="center"
             style="@style/cta_text"
@@ -83,7 +83,7 @@
         <TextView
             android:id="@+id/passes_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="@string/your_passes"
             android:gravity="center"
             style="@style/cta_text"
@@ -93,7 +93,7 @@
         <TextView
             android:id="@+id/pass_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="@string/next_player"
             android:gravity="center"
             style="@style/cta_text"
