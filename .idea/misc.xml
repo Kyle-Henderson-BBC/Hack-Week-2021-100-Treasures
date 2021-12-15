@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2" />
         <entry key="app/src/main/res/layout/guess_3_button.xml" value="0.19895833333333332" />
         <entry key="app/src/main/res/layout/guess_layout.xml" value="0.19895833333333332" />
+        <entry key="app/src/main/res/layout/image_scroll_item.xml" value="0.2513586956521739" />
         <entry key="app/src/main/res/layout/passes_item.xml" value="0.2513586956521739" />
         <entry key="app/src/main/res/layout/passes_layout.xml" value="0.2513586956521739" />
         <entry key="app/src/main/res/layout/scroll_item.xml" value="0.27674984001016417" />

@@ -82,7 +82,7 @@ class GuessActivity : AppCompatActivity() {
                 player.score = 0
                 charactersList = mutableListOf()
                 timer.start()
-                binding.guessLayout?.root?.setBackgroundColor(getColor(R.color.blue))
+                binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.blue))
                 current = setCurrentCharacter(repo.getNextCharacterAndConsume())
             }
         }
@@ -106,7 +106,6 @@ class GuessActivity : AppCompatActivity() {
             binding.guessLayout?.root?.visibility = View.GONE
             binding.yourFaves?.root?.visibility = View.VISIBLE
 
-            binding.yourFaves?.subTitle?.visibility = View.GONE
             binding.yourFaves?.mainTitle?.text = charactersList[0].name
 
             binding.yourFaves?.buttonLinearLayout?.visibility = View.VISIBLE
@@ -216,6 +215,9 @@ class GuessActivity : AppCompatActivity() {
     private fun updateScreen(){
         val character = charactersList[model.guessPosition]
         binding.yourFaves?.mainTitle?.text = character.name
+        binding.yourFaves?.subTitle?.text = character.desc
+
+
     }
 
 }
