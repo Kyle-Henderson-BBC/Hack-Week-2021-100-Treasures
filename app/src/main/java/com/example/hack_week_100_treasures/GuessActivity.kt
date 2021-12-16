@@ -100,7 +100,7 @@ class GuessActivity : AppCompatActivity() {
             binding.guessLayout?.characterView?.text = getString(R.string.ready)
             binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
 
-            binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.blue))
+            binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.yellow))
             countDown.start()
         }
 

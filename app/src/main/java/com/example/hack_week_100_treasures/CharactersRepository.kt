@@ -6,11 +6,11 @@ class CharactersRepository {
 
     // TODO: this list exists only as MVP hack values
     private val hardCodedGameCharacters: List<Character> = listOf(
-        Character("David Attenborough", null),
-        Character("Doctor Who", null),
-        Character("Hacker T. Dog", null),
-        Character("Villanelle (Killing Eve)", null),
-        Character("Wallace and Gromit", null),
+        Character("David Attenborough", null, desc = "Broadcaster, natural historian and author"),
+        Character("Doctor Who", null, desc = "Namesake of a science fiction TV show since 1963 starring the best blue box"),
+        Character("Hacker T. Dog", null, desc= "Canine CBBC character from Wigan"),
+        Character("Villanelle (Killing Eve)", null, desc = "Psychopathic assassin in TV show Killing Eve"),
+        Character("Wallace and Gromit", null, desc = "Animated inventor and his loyal dog"),
         Character("Terry Wogan", null),
         Character("Dirty Den (Den Watts)", null),
         Character("Basil Brush", null),
@@ -20,6 +20,7 @@ class CharactersRepository {
         Character("Hey Duggee", null),
         Character("Graham Norton", null),
         Character("Gary Linnekar", null),
+        Character("Stephen Fry", null)
     )
 
     private var availableCharacters: MutableList<Character> = hardCodedGameCharacters.toMutableList()
