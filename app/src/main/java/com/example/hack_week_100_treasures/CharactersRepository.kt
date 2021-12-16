@@ -6,11 +6,11 @@ class CharactersRepository {
 
     // TODO: this list exists only as MVP hack values
     private val hardCodedGameCharacters: List<Character> = listOf(
-        Character("David Attenborough", null, desc = "Broadcaster, natural historian and author"),
-        Character("Doctor Who", null, desc = "Namesake of a science fiction TV show since 1963 starring the best blue box"),
-        Character("Hacker T. Dog", null, desc= "Canine CBBC character from Wigan"),
-        Character("Villanelle (Killing Eve)", null, desc = "Psychopathic assassin in TV show Killing Eve"),
-        Character("Wallace and Gromit", null, desc = "Animated inventor and his loyal dog"),
+        Character("David Attenborough", R.raw.attenborough, desc = "Broadcaster, natural historian and author"),
+        Character("Doctor Who", R.raw.dr_who, desc = "Namesake of a science fiction TV show since 1963 starring the best blue box"),
+        Character("Hacker T. Dog", R.raw.hacker, desc= "Canine CBBC character from Wigan"),
+        Character("Villanelle (Killing Eve)", R.raw.killing_eve, desc = "Psychopathic assassin in TV show Killing Eve"),
+        Character("Wallace and Gromit", R.raw.wallace, desc = "Animated inventor and his loyal dog"),
         Character("Terry Wogan", null),
         Character("Dirty Den (Den Watts)", null),
         Character("Basil Brush", null),
