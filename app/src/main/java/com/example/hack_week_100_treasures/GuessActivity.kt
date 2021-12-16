@@ -136,6 +136,8 @@ class GuessActivity : AppCompatActivity() {
             binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
             binding.guessLayout?.characterView?.text = getString(R.string.ready)
             binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
+
+            binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.yellow))
             countDown.start()
         }
     }
