@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -67,14 +68,15 @@ class GuessActivity : AppCompatActivity() {
                 binding.guessLayout?.buttonLinearLayout?.visibility = View.VISIBLE
                 binding.guessLayout?.passesButton?.visibility = if(charactersList.size > 0) View.VISIBLE else View.GONE
                 binding.guessLayout?.textView3?.visibility = View.GONE
-                binding.guessLayout?.clock?.visibility = View.GONE
                 if(player.score <= 9 ) binding.guessLayout?.timeView?.textSize = 320f
+
+                binding.guessLayout?.clock?.setImageDrawable(AppCompatResources.getDrawable(this@GuessActivity, R.drawable.ic_medal_table))
 
                 tiltEventService.stopSensing()
             }
         }
 
-        val countDown = object: CountDownTimer(1000, 1000){
+        val countDown = object: CountDownTimer(4000, 1000){
             override fun onTick(millisUntilFinished: Long) {
                 val str = (millisUntilFinished / 1000).toString()
                 binding.guessLayout?.timeView?.text = str
@@ -86,6 +88,7 @@ class GuessActivity : AppCompatActivity() {
                 player.score = 0
                 //reset charactera list
                 charactersList = mutableListOf()
+                binding.guessLayout?.textView3?.visibility = View.VISIBLE
                 timer.start()
                 binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.blue))
                 current = setCurrentCharacter(repo.getNextCharacterAndConsume())

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 
 class GuessAdapter(private val data: List<Character>): RecyclerView.Adapter<GuessAdapter.ViewHolder>() {
@@ -18,6 +19,15 @@ class GuessAdapter(private val data: List<Character>): RecyclerView.Adapter<Gues
             txtView.text = char.name
             val str = "${position + 1} of $listSize"
             positionView.text = str
+            char.imageId?.let {
+                imageView.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        imageView.context,
+                        it
+                    )
+                )
+                txtView.visibility = View.GONE
+            }
         }
     }
 
