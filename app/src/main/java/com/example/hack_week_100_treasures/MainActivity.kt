@@ -24,7 +24,11 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Hack Week"
 
         binding.sidePanelRecyclerView?.layoutManager = LinearLayoutManager(this)
-        binding.sidePanelRecyclerView?.adapter = MainAdapter(listOf("item 1", "item 2", "item 3"))
+        binding.sidePanelRecyclerView?.adapter = MainAdapter(listOf("Place the phone against your forehead so that other players can see the screen.",
+            "Try to guess the BBC personality by asking questions to your team-mates. ",
+            "If it is a tough one,  tap the screen for an audio clue!",
+            "Tip the phone downwards after a correct answer. Tip it upwards to pass.",
+            "Have fun!"))
         binding.sidePanelRecyclerView?.addOnItemTouchListener(object: RecyclerView.SimpleOnItemTouchListener() {
                 override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                     return true

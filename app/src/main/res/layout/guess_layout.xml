@@ -10,16 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/inset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:background="@color/yellow">
+
     <TextView
         android:id="@+id/characterView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="10dp"
         style="@style/prompt"
         android:textAlignment="center"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_linear_layout"
         app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,12 +39,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clock_timer"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <TextView
             android:id="@+id/timeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/empty"
             style="@style/large_numeric"
+            tools:text="99"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,16 +63,15 @@
 
         <TextView
             android:id="@+id/panelTitle"
+            style="@style/container_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/container_title_text"
-            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.015"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.015"
+            android:layout_marginStart="42dp"
+            app:layout_constraintVertical_bias="0"
             tools:text="TextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,7 +87,7 @@
         <TextView
             android:id="@+id/end_button"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="85dp"
             android:text="@string/end_game"
             android:gravity="center"
             style="@style/cta_text"
@@ -83,7 +96,7 @@
         <TextView
             android:id="@+id/passes_button"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="85dp"
             android:text="@string/your_passes"
             android:gravity="center"
             style="@style/cta_text"
@@ -93,13 +106,26 @@
         <TextView
             android:id="@+id/pass_button"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="85dp"
             android:text="@string/next_player"
             android:gravity="center"
             style="@style/cta_text"
             android:background="@color/green"
             android:layout_weight="33"/>
     </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/tap_on_screen_for_a_clue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

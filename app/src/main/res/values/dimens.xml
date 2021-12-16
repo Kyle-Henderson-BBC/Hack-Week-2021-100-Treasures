@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="inset">15dp</dimen>
+    <dimen name="inset">12dp</dimen>
+    <dimen name="recycler_size">250dp</dimen>
 </resources>
