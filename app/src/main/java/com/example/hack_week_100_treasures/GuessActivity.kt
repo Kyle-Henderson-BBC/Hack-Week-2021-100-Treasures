@@ -96,6 +96,7 @@ class GuessActivity : AppCompatActivity() {
         }
         binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
         binding.guessLayout?.characterView?.text = getString(R.string.ready)
+        binding.guessLayout?.clock?.setImageDrawable(AppCompatResources.getDrawable(this@GuessActivity, R.drawable.ic_clock_timer))
         countDown.start()
 
         binding.guessLayout?.endButton?.setOnClickListener {
@@ -110,6 +111,7 @@ class GuessActivity : AppCompatActivity() {
             binding.guessLayout?.timeView?.textSize = 206f
 
             binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.yellow))
+            binding.guessLayout?.clock?.setImageDrawable(AppCompatResources.getDrawable(this@GuessActivity, R.drawable.ic_clock_timer))
             countDown.start()
         }
 
@@ -148,6 +150,7 @@ class GuessActivity : AppCompatActivity() {
             binding.guessLayout?.timeView?.textSize = 206f
 
             binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.yellow))
+            binding.guessLayout?.clock?.setImageDrawable(AppCompatResources.getDrawable(this@GuessActivity, R.drawable.ic_clock_timer))
             countDown.start()
         }
     }
