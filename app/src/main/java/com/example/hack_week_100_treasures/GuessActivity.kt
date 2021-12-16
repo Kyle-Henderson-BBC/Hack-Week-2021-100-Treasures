@@ -3,17 +3,18 @@ package com.example.hack_week_100_treasures
 import android.content.Context
 import android.content.Intent
 import android.hardware.SensorManager
+import android.media.SoundPool
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import com.example.hack_week_100_treasures.databinding.ActivityGuessBinding
-import com.example.hack_week_100_treasures.sensor.TiltEventService
-import android.media.SoundPool
 import android.view.MotionEvent
+import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hack_week_100_treasures.databinding.ActivityGuessBinding
+import com.example.hack_week_100_treasures.sensor.TiltEventService
 
 
 class GuessActivity : AppCompatActivity() {
@@ -46,13 +47,13 @@ class GuessActivity : AppCompatActivity() {
             { moveOn(true) }
         )
 
-        player = Player("Times Up!", 0)
+        player = Player("Out of time!", 0)
 
         binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
         binding.yourFaves?.settingsButton?.visibility = View.GONE
         binding.yourFaves?.startButton?.visibility = View.GONE
 
-        val timer = object : CountDownTimer(10000, 1000) {
+        val timer = object : CountDownTimer(20000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val str = (millisUntilFinished / 1000).toString()
                 binding.guessLayout?.timeView?.text = str
@@ -65,12 +66,15 @@ class GuessActivity : AppCompatActivity() {
 
                 binding.guessLayout?.buttonLinearLayout?.visibility = View.VISIBLE
                 binding.guessLayout?.passesButton?.visibility = if(charactersList.size > 0) View.VISIBLE else View.GONE
+                binding.guessLayout?.textView3?.visibility = View.GONE
+                binding.guessLayout?.clock?.visibility = View.GONE
+                if(player.score <= 9 ) binding.guessLayout?.timeView?.textSize = 320f
 
                 tiltEventService.stopSensing()
             }
         }
 
-        val countDown = object: CountDownTimer(4000, 1000){
+        val countDown = object: CountDownTimer(1000, 1000){
             override fun onTick(millisUntilFinished: Long) {
                 val str = (millisUntilFinished / 1000).toString()
                 binding.guessLayout?.timeView?.text = str
@@ -80,6 +84,7 @@ class GuessActivity : AppCompatActivity() {
                 tiltEventService.startSensing()
                 binding.guessLayout?.panelTitle?.text = getString(R.string.time)
                 player.score = 0
+                //reset charactera list
                 charactersList = mutableListOf()
                 timer.start()
                 binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.blue))
@@ -99,6 +104,7 @@ class GuessActivity : AppCompatActivity() {
             binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
             binding.guessLayout?.characterView?.text = getString(R.string.ready)
             binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
+            binding.guessLayout?.timeView?.textSize = 206f
 
             binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.yellow))
             countDown.start()
@@ -136,6 +142,7 @@ class GuessActivity : AppCompatActivity() {
             binding.guessLayout?.panelTitle?.text = getString(R.string.count_down)
             binding.guessLayout?.characterView?.text = getString(R.string.ready)
             binding.guessLayout?.buttonLinearLayout?.visibility = View.GONE
+            binding.guessLayout?.timeView?.textSize = 206f
 
             binding.guessLayout?.constraint?.setBackgroundColor(getColor(R.color.yellow))
             countDown.start()

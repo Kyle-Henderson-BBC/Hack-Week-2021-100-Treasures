@@ -4,20 +4,21 @@
     <string name="start">Start Game</string>
     <string name="empty">--</string>
     <string name="reset">Reset</string>
-    <string name="score">Score:</string>
-    <string name="time">Time:</string>
+    <string name="score">Score</string>
+    <string name="time">Time</string>
     <string name="settings">Settings</string>
     <string name="count_down">Countdown:</string>
     <string name="ready">Ready!</string>
-    <string name="app_name_face_off">The Great British Face Off</string>
+    <string name="app_name_face_off">The Great British Face Off!</string>
     <string name="app_subtitle">Become famous faces from 100 years of Brilliant British Characters</string>
     <string name="_0_of_0">0 of 0</string>
-    <string name="end_game">End Game</string>
-    <string name="next_player">Next Player</string>
-    <string name="your_passes">Your Passes</string>
+    <string name="end_game">End</string>
+    <string name="next_player">Next</string>
+    <string name="your_passes">Passes</string>
     <string name="bbc">BBC</string>
     <string name="slide_panel_up">slide panel up</string>
     <string name="slide_panel_down">slide panel down</string>
     <string name="how_to_play">How to Play</string>
     <string name="tap_to_play_audio_or_video">Tap to play audio or video</string>
+    <string name="tap_on_screen_for_a_clue">Tap on screen for a clue</string>
 </resources>
